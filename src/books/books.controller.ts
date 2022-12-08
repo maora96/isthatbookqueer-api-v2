@@ -10,11 +10,14 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { BooksService } from './books.service';
 import { CreateBookDto } from './dtos/create-book.dto';
 import { EditBookDto } from './dtos/edit-book.dto';
 
 @Controller('books')
 export class BooksController {
+  constructor(public booksService: BooksService) {}
+
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() body: CreateBookDto) {
@@ -31,13 +34,13 @@ export class BooksController {
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   async getOne(@Param('id') id: string) {
-    console.log(id);
+    return this.booksService.findOne(id);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('id') id: string) {
-    console.log(id);
+    return this.booksService.remove(id);
   }
 
   @Get()

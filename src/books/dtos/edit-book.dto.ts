@@ -40,5 +40,5 @@ export class EditBookDto {
 
   @IsString({ message: 'Queer_data must be a string.' })
   @IsOptional()
-  quuer_data?: string;
+  queer_data?: string;
 }
